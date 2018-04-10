@@ -21,53 +21,62 @@ class App extends Component {
     const text = this.state.text;
     let rolls = text.replace(/[-]/g,"", "").split("");
     this.setState({rolls: rolls});
-    // this.score()
+    this.score()
   }
-
+  score(){
+    let result = this.state.result;
+    let rolls = this.state.rolls;
+    for (let i=0; i<20;i++){
+      result += rolls[i]
+    }
+    this.setState({result:result})
+  }
   // score(){
   //   const {result, rollIndex} = this.state;
   //
   //     for (let frameIndex = 0; frameIndex< 10; frameIndex++){
   //       //accounting for a spare
   //       if(this.isStrike()){
-  //         this.setState{(result: this.state.result += this.getStrikeScore())};
-  //         rollIndex++
+  //         this.setState({result: this.state.result + this.getStrikeScore()});
+  //         this.setState({rollIndex: rollIndex+1});
   //       }
   //       else if (this.isSpare()){
-  //         result += this.getSpareScore();
+  //         this.setState({result: this.state.result + this.getSpareScore()});
   //         //gives the two rolls in each frame
-  //         rollIndex += 2;
+  //         this.setState({rollIndex: rollIndex+2});
   //       }
   //       else{
-  //         result += this.getNormalScore();
+  //
+  //         this.setState({result: this.state.result + this.getNormalScore()});
   //         //gives the two rolls in each frame
-  //         rollIndex += 2;
+  //         this.setState({rollIndex: rollIndex+2});
   //       }
   //
   //     }
+  //           console.log(result)
   //           return result;
   //
   // }
   // isStrike(){
-  //   return this.rolls[rollIndex] == 'X';
+  //   return this.state.rolls[this.state.rollIndex] === 'X';
   // }
   //
   // isSpare(){
-  //   return this.rolls[rollIndex] == '/';
+  //   return this.state.rolls[this.state.rollIndex] === '/';
   // }
   //
   // getStrikeScore(){
-  //   return 10 + this.rolls[rollIndex + 1];
+  //   return 10 + this.state.rolls[this.state.rollIndex + 1];
   // }
   //
   // getSpareScore(){
-  //   return 10 + this.rolls[rollIndex + 1] + this.rolls[rollIndex + 2];
+  //   return 10 + this.state.rolls[this.state.rollIndexx + 1] + this.state.rolls[this.state.rollIndex + 2];
   // }
   //
   // getNormalScore(){
-  //   return this.rolls[rollIndex] + this.rolls[rollIndex + 1];
+  //   return this.state.rolls[this.state.rollIndex] + this.state.rolls[this.state.rollIndex + 1];
   // }
-  //
+
 
 
 
@@ -80,6 +89,7 @@ class App extends Component {
           <FormControl onChange= {this.onChange}/>
           <Button onClick={() => this.onSubmit()} >Submit</Button>
         </Form>
+        <h3>{this.state.result}</h3>
         {
           this.state.rolls.map((rolls, index) =>{
             return(
